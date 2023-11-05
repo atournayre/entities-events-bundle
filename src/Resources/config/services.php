@@ -19,6 +19,7 @@ use Atournayre\Bundle\EntitiesEventsBundle\Service\PreRemoveService;
 use Atournayre\Bundle\EntitiesEventsBundle\Service\PreUpdateService;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Events;
+use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
 
 return static function (ContainerConfigurator $container) {
     $DOCTRINE_EVENT_LISTENER_TAG = 'doctrine.event_listener';
@@ -58,26 +59,32 @@ return static function (ContainerConfigurator $container) {
 
         ->set(PrePersistListener::class)->public()
             ->arg(0, service(PrePersistService::class))
+            ->arg(1, service(ParameterBagInterface::class))
             ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::prePersist, 'priority' => -128])
 
         ->set(PreUpdateListener::class)->public()
             ->arg(0, service(PreUpdateService::class))
+            ->arg(1, service(ParameterBagInterface::class))
             ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::preUpdate, 'priority' => -128])
 
         ->set(PreRemoveListener::class)->public()
             ->arg(0, service(PreRemoveService::class))
+            ->arg(1, service(ParameterBagInterface::class))
             ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::preRemove, 'priority' => -128])
 
         ->set(PostPersistListener::class)->public()
             ->arg(0, service(PostPersistService::class))
+            ->arg(1, service(ParameterBagInterface::class))
             ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postPersist, 'priority' => -128])
 
         ->set(PostUpdateListener::class)->public()
             ->arg(0, service(PostUpdateService::class))
+            ->arg(1, service(ParameterBagInterface::class))
             ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postUpdate, 'priority' => -128])
 
         ->set(PostRemoveListener::class)->public()
             ->arg(0, service(PostRemoveService::class))
+            ->arg(1, service(ParameterBagInterface::class))
             ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postRemove, 'priority' => -128])
 
     ;
