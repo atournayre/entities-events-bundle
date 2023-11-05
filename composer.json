@@ -1,0 +1,24 @@
+{
+    "name": "atournayre/entities-events-bundle",
+    "type": "symfony-bundle",
+    "description": "This bundle provides a way to dispatch events when entities are created, updated or deleted using Doctrine ORM events and Symfony EventDispatcher.",
+    "autoload": {
+        "psr-4": {
+            "Atournayre\\Bundle\\EntitiesEventsBundle\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "atournayre",
+            "email": "a.tournayre@aroban.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "symfony/dependency-injection": "^6 || ^7",
+        "symfony/http-kernel": "^6 || ^7",
+        "symfony/config": "^6 || ^7",
+        "webmozart/assert": "^1.11",
+        "doctrine/orm": "^2.16"
+    }
+}
