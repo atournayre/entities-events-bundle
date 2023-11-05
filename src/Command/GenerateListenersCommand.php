@@ -32,7 +32,7 @@ class GenerateListenersCommand extends Command
     protected function configure(): void
     {
         $this
-            ->addOption('path', null, InputOption::VALUE_NONE, 'Target path.', self::DEFAULT_TARGET_PATH);
+            ->addOption('path', null, InputOption::VALUE_OPTIONAL, 'Target path.', self::DEFAULT_TARGET_PATH);
     }
 
     protected function initialize(InputInterface $input, OutputInterface $output): void
