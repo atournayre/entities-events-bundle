@@ -18,28 +18,24 @@ class ListenerConfigurationPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container): void
     {
-        if (false === $container->getParameter('atournayre_entities_events.enable_pre_persist_listener')) {
-            $container->removeDefinition(PrePersistListener::class);
-        }
+        $this->removeListenerDefinitions($container);
+    }
 
-        if (false === $container->getParameter('atournayre_entities_events.enable_pre_update_listener')) {
-            $container->removeDefinition(PreUpdateListener::class);
-        }
+    private function removeListenerDefinitions(ContainerBuilder $container): void
+    {
+        $listeners = [
+            PrePersistListener::class => $container->getParameter('atournayre_entities_events.enable_pre_persist_listener'),
+            PreUpdateListener::class => $container->getParameter('atournayre_entities_events.enable_pre_update_listener'),
+            PreRemoveListener::class => $container->getParameter('atournayre_entities_events.enable_pre_remove_listener'),
+            PostPersistListener::class => $container->getParameter('atournayre_entities_events.enable_post_persist_listener'),
+            PostUpdateListener::class => $container->getParameter('atournayre_entities_events.enable_post_update_listener'),
+            PostRemoveListener::class => $container->getParameter('atournayre_entities_events.enable_post_remove_listener'),
+        ];
 
-        if (false === $container->getParameter('atournayre_entities_events.enable_pre_remove_listener')) {
-            $container->removeDefinition(PreRemoveListener::class);
-        }
+        $definitionsToRemove = array_keys(array_filter($listeners));
 
-        if (false === $container->getParameter('atournayre_entities_events.enable_post_persist_listener')) {
-            $container->removeDefinition(PostPersistListener::class);
-        }
-
-        if (false === $container->getParameter('atournayre_entities_events.enable_post_update_listener')) {
-            $container->removeDefinition(PostUpdateListener::class);
-        }
-
-        if (false === $container->getParameter('atournayre_entities_events.enable_post_remove_listener')) {
-            $container->removeDefinition(PostRemoveListener::class);
+        foreach ($definitionsToRemove as $definitionToRemove) {
+            $container->removeDefinition($definitionToRemove);
         }
     }
 }
