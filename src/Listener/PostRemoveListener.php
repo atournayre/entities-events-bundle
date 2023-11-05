@@ -3,23 +3,21 @@
 namespace Atournayre\Bundle\EntitiesEventsBundle\Listener;
 
 use Atournayre\Bundle\EntitiesEventsBundle\Service\PostRemoveService;
+use Doctrine\Bundle\DoctrineBundle\Attribute\AsDoctrineListener;
 use Doctrine\ORM\Event\PostRemoveEventArgs;
-use Symfony\Component\DependencyInjection\ParameterBag\ParameterBagInterface;
+use Doctrine\ORM\Events;
 
+//#[AsDoctrineListener(event: Events::postRemove, priority: 128)]
 final readonly class PostRemoveListener
 {
     public function __construct(
         private PostRemoveService $postRemove,
-        private ParameterBagInterface $parameterBag,
     )
     {
     }
 
     public function __invoke(PostRemoveEventArgs $postRemoveEventArgs): void
     {
-        if (!$this->parameterBag->get('atournayre_entities_events.enable_post_remove_listener')) {
-            return;
-        }
         ($this->postRemove)($postRemoveEventArgs);
     }
 }

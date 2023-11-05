@@ -19,6 +19,10 @@
         "symfony/http-kernel": "^6 || ^7",
         "symfony/config": "^6 || ^7",
         "webmozart/assert": "^1.11",
-        "doctrine/orm": "^2.16"
+        "doctrine/orm": "^2.16",
+        "doctrine/doctrine-bundle": "^2.10"
+    },
+    "require-dev": {
+        "symfony/console": "^6.3"
     }
 }

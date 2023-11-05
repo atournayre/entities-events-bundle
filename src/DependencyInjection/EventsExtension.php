@@ -29,12 +29,5 @@ class EventsExtension extends Extension
 
         $loader = new PhpFileLoader($container, new FileLocator(\dirname(__DIR__).'/Resources/config'));
         $loader->load('services.php');
-
-        $container->setParameter('atournayre_entities_events.enable_pre_persist_listener', $config['enable_pre_persist_listener']);
-        $container->setParameter('atournayre_entities_events.enable_pre_update_listener', $config['enable_pre_update_listener']);
-        $container->setParameter('atournayre_entities_events.enable_pre_remove_listener', $config['enable_pre_remove_listener']);
-        $container->setParameter('atournayre_entities_events.enable_post_persist_listener', $config['enable_post_persist_listener']);
-        $container->setParameter('atournayre_entities_events.enable_post_update_listener', $config['enable_post_update_listener']);
-        $container->setParameter('atournayre_entities_events.enable_post_remove_listener', $config['enable_post_remove_listener']);
     }
 }
