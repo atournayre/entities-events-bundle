@@ -43,6 +43,10 @@ class GenerateListenersCommand extends Command
         (new Filesystem())->mkdir($targetPath);
 
         $this->targetPath = $targetPath;
+
+        if ($input->getOption('env') !== 'dev') {
+            throw new \RuntimeException('This command can only be executed in dev environment.');
+        }
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
