@@ -58,27 +58,27 @@ return static function (ContainerConfigurator $container) {
 
         ->set(PrePersistListener::class)->public()
             ->arg(0, service(PrePersistService::class))
-            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::prePersist])
+            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::prePersist, 'priority' => -128])
 
         ->set(PreUpdateListener::class)->public()
             ->arg(0, service(PreUpdateService::class))
-            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::preUpdate, 'priority' => 128])
+            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::preUpdate, 'priority' => -128])
 
         ->set(PreRemoveListener::class)->public()
             ->arg(0, service(PreRemoveService::class))
-            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::preRemove, 'priority' => 128])
+            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::preRemove, 'priority' => -128])
 
         ->set(PostPersistListener::class)->public()
             ->arg(0, service(PostPersistService::class))
-            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postPersist, 'priority' => 128])
+            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postPersist, 'priority' => -128])
 
         ->set(PostUpdateListener::class)->public()
             ->arg(0, service(PostUpdateService::class))
-            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postUpdate, 'priority' => 128])
+            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postUpdate, 'priority' => -128])
 
         ->set(PostRemoveListener::class)->public()
             ->arg(0, service(PostRemoveService::class))
-            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postRemove, 'priority' => 128])
+            ->tag($DOCTRINE_EVENT_LISTENER_TAG, ['event' => Events::postRemove, 'priority' => -128])
 
     ;
 };
