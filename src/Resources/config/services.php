@@ -18,15 +18,15 @@ return static function (ContainerConfigurator $container) {
         ->defaults()->private();
 
     $services
-        ->set(EntityEventDispatcher::class)
+        ->set(EntityManagerService::class)
+            ->arg(0, service(EntityManagerInterface::class))
+
+        ->set(EntityEventDispatcher::class)->public()
             ->arg(0, service('event_dispatcher'))
             ->arg(1, service('logger'))
         ->alias(EntityEventDispatcherInterface::class, EntityEventDispatcher::class)
 
-        ->set(EntityManagerService::class)
-            ->arg(0, service(EntityManagerInterface::class))
-
-        ->set(PrePersistService::class)->public()
+       ->set(PrePersistService::class)->public()
             ->arg(0, service(EntityEventDispatcherInterface::class))
 
         ->set(PreUpdateService::class)->public()
