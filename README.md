@@ -13,7 +13,7 @@ Use [Composer] to install the package:
 
 ### Composer
 ```shell
-composer require atournayre/entities-events-bundle --dev
+composer require atournayre/entities-events-bundle
 ```
 ### Register bundle
 
@@ -26,6 +26,71 @@ return [
     // ...
 ]
 ```
+
+### Install listeners
+
+```bash
+php bin/console atournayre:entities-events:generate-listeners
+```
+
+Usage example
+----------
+
+### Update your entity
+
+```php
+use Atournayre\Bundle\EntitiesEventsBundle\Collection\EventCollection;
+use Atournayre\Bundle\EntitiesEventsBundle\Contracts\HasEventsInterface;
+
+// Implements HasEventsInterface
+class YourEntity implements HasEventsInterface
+{
+  // Use EventsTrait to implement HasEventsInterface
+  use EventsTrait;
+  
+  public function __construct()
+  {
+    // Initialize the collection of events
+    $this->eventCollection = new EventCollection();
+  }
+  
+  public function doSomething(): void
+  {
+    // Do something here
+    // Then dispatch an event
+    $this->addEvent(new YourEvent($this));
+  }
+}
+```
+
+### Create an event
+```php
+use Symfony\Contracts\EventDispatcher\Event;
+
+class YourEvent extends Event
+{
+  public function __construct(
+    public readonly YourEntity $entity
+  ) {}
+}
+```
+
+### Handle an event
+```php
+
+use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
+
+#[AsEventListener]
+class YourEventListener
+{
+  public function __invoke(YourEvent $event): void
+  {
+    // Do something here
+  }
+}
+```
+
+That's all, the bundle will do the rest.
 
 Contribute
 ----------
