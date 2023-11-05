@@ -18,7 +18,7 @@ return static function (ContainerConfigurator $container) {
         ->defaults()->private();
 
     $services
-        ->set(EntityManagerService::class)
+        ->set(EntityManagerService::class)->public()
             ->arg(0, service(EntityManagerInterface::class))
 
         ->set(EntityEventDispatcher::class)->public()
@@ -37,15 +37,15 @@ return static function (ContainerConfigurator $container) {
 
         ->set(PostPersistService::class)->public()
             ->arg(0, service(EntityEventDispatcherInterface::class))
-            ->arg(1, service('doctrine'))
+            ->arg(1, service(EntityManagerService::class))
 
         ->set(PostUpdateService::class)->public()
             ->arg(0, service(EntityEventDispatcherInterface::class))
-            ->arg(1, service('doctrine'))
+            ->arg(1, service(EntityManagerService::class))
 
         ->set(PostRemoveService::class)->public()
             ->arg(0, service(EntityEventDispatcherInterface::class))
-            ->arg(1, service('doctrine'))
+            ->arg(1, service(EntityManagerService::class))
 
     ;
 };
