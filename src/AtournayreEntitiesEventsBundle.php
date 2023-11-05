@@ -20,6 +20,6 @@ class AtournayreEntitiesEventsBundle extends Bundle
 
     public function build(ContainerBuilder $container): void
     {
-        $container->addCompilerPass(new ListenerConfigurationPass());
+//        $container->addCompilerPass(new ListenerConfigurationPass());
     }
 }
