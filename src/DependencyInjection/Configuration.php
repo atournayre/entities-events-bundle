@@ -12,6 +12,6 @@ class Configuration implements ConfigurationInterface
      */
     public function getConfigTreeBuilder(): TreeBuilder
     {
-        return new TreeBuilder('atournayre_events');
+        return new TreeBuilder('atournayre_entities_events');
     }
 }

@@ -9,7 +9,7 @@ use Symfony\Component\DependencyInjection\Loader\PhpFileLoader;
 
 class EventsExtension extends Extension
 {
-    public const ALIAS = 'atournayre_events';
+    public const ALIAS = 'atournayre_entities_events';
 
     public function getAlias(): string
     {
