@@ -2,6 +2,7 @@
 
 namespace Symfony\Component\DependencyInjection\Loader\Configurator;
 
+use Atournayre\Bundle\EntitiesEventsBundle\Contracts\EntityEventDispatcherInterface;
 use Atournayre\Bundle\EntitiesEventsBundle\Dispatcher\EntityEventDispatcher;
 use Atournayre\Bundle\EntitiesEventsBundle\Service\EntityManagerService;
 use Atournayre\Bundle\EntitiesEventsBundle\Service\PostPersistService;
@@ -20,29 +21,30 @@ return static function (ContainerConfigurator $container) {
         ->set(EntityEventDispatcher::class)
             ->arg(0, service('event_dispatcher'))
             ->arg(1, service('logger'))
+        ->alias(EntityEventDispatcherInterface::class, EntityEventDispatcher::class)
 
         ->set(EntityManagerService::class)
             ->arg(0, service(EntityManagerInterface::class))
 
         ->set(PrePersistService::class)->public()
-            ->arg(0, service('event_dispatcher'))
+            ->arg(0, service(EntityEventDispatcherInterface::class))
 
         ->set(PreUpdateService::class)->public()
-            ->arg(0, service('event_dispatcher'))
+            ->arg(0, service(EntityEventDispatcherInterface::class))
 
         ->set(PreRemoveService::class)->public()
-            ->arg(0, service('event_dispatcher'))
+            ->arg(0, service(EntityEventDispatcherInterface::class))
 
         ->set(PostPersistService::class)->public()
-            ->arg(0, service('event_dispatcher'))
+            ->arg(0, service(EntityEventDispatcherInterface::class))
             ->arg(1, service('doctrine'))
 
         ->set(PostUpdateService::class)->public()
-            ->arg(0, service('event_dispatcher'))
+            ->arg(0, service(EntityEventDispatcherInterface::class))
             ->arg(1, service('doctrine'))
 
         ->set(PostRemoveService::class)->public()
-            ->arg(0, service('event_dispatcher'))
+            ->arg(0, service(EntityEventDispatcherInterface::class))
             ->arg(1, service('doctrine'))
 
     ;
