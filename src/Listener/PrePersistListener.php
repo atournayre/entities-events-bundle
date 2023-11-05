@@ -1,7 +1,8 @@
 <?php
 
-namespace Atournayre\Bundle\EntitiesEventsBundle\Service;
+namespace Atournayre\Bundle\EntitiesEventsBundle\Listener;
 
+use Atournayre\Bundle\EntitiesEventsBundle\Service\PrePersistService;
 use Doctrine\ORM\Event\PrePersistEventArgs;
 
 final readonly class PrePersistListener

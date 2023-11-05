@@ -1,7 +1,8 @@
 <?php
 
-namespace Atournayre\Bundle\EntitiesEventsBundle\Service;
+namespace Atournayre\Bundle\EntitiesEventsBundle\Listener;
 
+use Atournayre\Bundle\EntitiesEventsBundle\Service\PostRemoveService;
 use Doctrine\ORM\Event\PostRemoveEventArgs;
 
 final readonly class PostRemoveListener

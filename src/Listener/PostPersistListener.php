@@ -1,7 +1,8 @@
 <?php
 
-namespace Atournayre\Bundle\EntitiesEventsBundle\Service;
+namespace Atournayre\Bundle\EntitiesEventsBundle\Listener;
 
+use Atournayre\Bundle\EntitiesEventsBundle\Service\PostPersistService;
 use Doctrine\ORM\Event\PostPersistEventArgs;
 
 final readonly class PostPersistListener

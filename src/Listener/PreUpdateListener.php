@@ -1,7 +1,8 @@
 <?php
 
-namespace Atournayre\Bundle\EntitiesEventsBundle\Service;
+namespace Atournayre\Bundle\EntitiesEventsBundle\Listener;
 
+use Atournayre\Bundle\EntitiesEventsBundle\Service\PreUpdateService;
 use Doctrine\ORM\Event\PreUpdateEventArgs;
 
 final readonly class PreUpdateListener
